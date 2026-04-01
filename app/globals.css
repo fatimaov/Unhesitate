@@ -119,6 +119,13 @@
   body {
     @apply bg-background text-foreground;
   }
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  * {
+    box-sizing: border-box;
+  }
 }
 @keyframes neonGradient {
   0% { background-position: 0% 50%; }
@@ -147,4 +154,12 @@
 
 .animate-fadeIn {
   animation: fadeIn 0.3s ease-out;
+}
+
+/* Prevent text overflow utilities */
+.text-responsive {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
 }

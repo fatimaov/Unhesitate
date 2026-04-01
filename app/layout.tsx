@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Orbitron, Exo_2 } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import {ClerkProvider} from "@clerk/nextjs";
 
 const orbitron = Orbitron({
   variable: "--font-orbitron",
@@ -18,6 +19,7 @@ const exo2 = Exo_2({
 export const metadata: Metadata = {
   title: "Dream Vault",
   description: "Futuristic Glassmorphism UI",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
 };
 
 export default function RootLayout({
@@ -27,9 +29,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${orbitron.variable} ${exo2.variable}`}>
-      <body className="antialiased bg-black text-white">
-        <Navbar />
-        {children}
+      <body className="antialiased bg-black text-white overflow-x-hidden">
+        <ClerkProvider appearance={{
+          elements: {
+            formButtonPrimary: 
+              "bg-black text-white hover:bg-gray-800 rounded-full px-6 py-2",
+            card: "shadow-xl rounded-2xl",
+            headerTitle: "text-2xl font-bold text-gray-900",
+          },
+        }}>
+           <Navbar />
+           {children}
+        </ClerkProvider>
+       
       </body>
     </html>
   );
