@@ -1,54 +1,192 @@
-This is a [Next.js](https://nextjs.org) project using Clerk for auth and MongoDB (Mongoose) for data storage.
+# Unhesitate
 
-## Getting Started
+Unhesitate is a futuristic journaling platform where people can capture dreams and nightmares, explore community-style entries, and turn subconscious patterns into personal growth.
 
-### Environment Setup
+This project is currently in an early MVP stage and is being prepared for serious collaboration and scaling.
 
-Create `.env.local` with:
+## Why This Project
 
-```
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key
-CLERK_SECRET_KEY=your_secret_key
-MONGODB_URI=mongodb+srv://USERNAME:PASSWORD@CLUSTER.mongodb.net/dream-vault?retryWrites=true&w=majority
-```
+Most journaling apps focus only on daily tasks and productivity. Unhesitate focuses on inner life:
 
-Install dependencies:
+- Capture dreams and nightmares in a structured way
+- Build a personal archive of subconscious patterns
+- Create a visually rich, immersive writing and reading experience
+- Grow into a platform with AI insights, mood tracking, and community features
+
+## Current Status (MVP)
+
+Implemented now:
+
+- Next.js App Router project with TypeScript
+- Clerk authentication integrated globally
+- MongoDB + Mongoose persistence
+- Create dream or nightmare entries
+- View dream feed and nightmare feed
+- Responsive navigation and animated card-based UI
+
+Still basic / in progress:
+
+- Motivation page is a placeholder
+- No advanced search/filter/sort
+- No edit/update flow in UI yet
+- No tests yet
+- No analytics, moderation, or AI features yet
+
+## Tech Stack
+
+- Next.js 15 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Clerk (authentication)
+- MongoDB + Mongoose
+
+## Local Setup
+
+### 1. Clone and install
 
 ```bash
 npm install
 ```
 
-Then run the development server:
+### 2. Create environment variables
+
+Create a .env.local file in project root:
+
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+MONGO_URI=your_mongodb_connection_string
+```
+
+Important: the current code reads MONGO_URI (not MONGODB_URI).
+
+### 3. Run development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000
 
-You can start editing pages in `app/`. Auth is handled via Clerk middleware and `ClerkProvider` in `app/layout.tsx`. Data is persisted via MongoDB models in `models/` and API routes under `app/api/dreams`.
+## NPM Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- npm run dev: Start local dev server (Turbopack)
+- npm run build: Production build
+- npm run start: Run production build locally
+- npm run lint: Run lint checks
 
-## Learn More
+## Current App Routes
 
-To learn more about Next.js, take a look at the following resources:
+- /: Landing page
+- /create: Create a dream/nightmare
+- /dreams: Dream feed
+- /nightmares: Nightmare feed
+- /motivation: Placeholder page
+- /about: About-style page
+- /sign-in: Clerk sign-in flow
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Current API
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- GET /api/dreams: Fetch dreams list
+- POST /api/dreams: Create dream/nightmare
 
-## API
+Request body for POST /api/dreams:
 
-- `GET /api/dreams`: List your dreams (requires auth)
-- `POST /api/dreams`: Create a dream with `{ title, description, location?, type? }`
-- `GET /api/dreams/:id`: Get a single dream
-- `PUT /api/dreams/:id`: Update a dream
-- `DELETE /api/dreams/:id`: Delete a dream
+```json
+{
+	"title": "Flying over neon city",
+	"description": "I was floating between towers...",
+	"type": "dream",
+	"location": "Tokyo"
+}
+```
+
+## Project Structure
+
+Top-level structure:
+
+- app: Next.js routes, layouts, API routes
+- components: UI and reusable components
+- lib/actions: Server actions
+- lib/models: Mongoose models
+- lib/mongodb.ts: DB connection logic
+- public: Static assets
+
+## Collaboration Roadmap
+
+We are looking for collaborators to help move from MVP to v1.
+
+### Phase 1: Product Foundation
+
+- Improve form validation and error UX
+- Add loading/empty/error states across pages
+- Add pagination and filtering for feeds
+- Add unit/integration tests
+
+### Phase 2: Core Product Value
+
+- Add entry editing and deletion from UI
+- Add tags, moods, and sleep metadata
+- Build profile page and personal dashboard
+- Add search and timeline view
+
+### Phase 3: Smart Features
+
+- AI-powered dream summarization
+- AI mood/pattern detection over time
+- Weekly insight reports
+- Suggested prompts for reflection
+
+### Phase 4: Community and Scale
+
+- Public/private entry controls
+- Follow system and reactions
+- Moderation and abuse reporting
+- Performance tuning and caching strategy
+
+## Areas Where Contributors Are Needed
+
+- Frontend: UI polish, accessibility, responsive improvements
+- Backend: richer API design, validation, authorization hardening
+- Database: schema evolution and query optimization
+- DevOps: deployment workflow, CI/CD, environments
+- AI/ML: NLP-based dream insights and recommendation experiments
+- Product/UX: feature planning and user journey improvements
+
+## Contribution Guide
+
+1. Fork the repo
+2. Create a branch: feature/your-feature-name
+3. Make focused commits with clear messages
+4. Open a pull request with:
+	 - Problem statement
+	 - What changed
+	 - Screenshots (if UI)
+	 - Testing notes
+
+Suggested branch names:
+
+- feature/add-edit-dream-flow
+- fix/mobile-navbar-overlap
+- chore/add-test-setup
+
+## Quality Standards
+
+- Keep components small and reusable
+- Prefer strict typing over any
+- Add tests for new behavior
+- Avoid silent failures; surface useful errors
+- Keep UI fast on mobile-first devices
+
+## Known Gaps
+
+- Some auth/data paths are still being hardened
+- Feed endpoints are currently basic and can be expanded
+- Observability (logs/metrics) is not set up yet
+
+## Vision
+
+Unhesitate is intended to become more than a CRUD app. The long-term goal is a reflective platform where personal stories, emotional patterns, and intelligent insights help users understand themselves better.
+
+If that mission resonates with you, contributions are welcome.

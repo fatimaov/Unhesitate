@@ -20,7 +20,7 @@ export const connect = async()=>{
   if(cached.conn) return cached.conn;
 
   cached.promise = cached.promise || mongoose.connect(MONGO_URI,{
-    dbName:'dream-vault',
+    dbName:'unhesitate',
     bufferCommands:false,
     connectTimeoutMS:30000,
   })

@@ -17,7 +17,7 @@ const exo2 = Exo_2({
 });
 
 export const metadata: Metadata = {
-  title: "Dream Vault",
+  title: "Unhesitate",
   description: "Futuristic Glassmorphism UI",
   viewport: "width=device-width, initial-scale=1, maximum-scale=5",
 };
