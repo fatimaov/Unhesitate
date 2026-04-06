@@ -20,6 +20,7 @@ export default async function Dreams() {
             location={d.location}
             username={d.username}
             userImage={d.userImage}
+            imageUrl={d.imageUrl}
           />
         ))}
       </section>

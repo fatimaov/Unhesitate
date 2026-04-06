@@ -43,6 +43,11 @@ const DreamSchema = new mongoose.Schema(
       maxlength: 5000,
     },
 
+    imageUrl: {
+      type: String,
+      default: "",
+    },
+
     images: {
       type: [String],
       default: [],

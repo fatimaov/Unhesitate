@@ -8,6 +8,8 @@ const DreamForm = () => {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [imageError, setImageError] = useState(false);
   const [type, setType] = useState<'dream' | 'nightmare'>("dream");
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -23,11 +25,14 @@ const DreamForm = () => {
       location,
       description,
       type,
+      imageUrl,
     });
 
     setTitle("");
     setLocation("");
     setDescription("");
+    setImageUrl("");
+    setImageError(false);
     setType("dream");
     setMessage("Dream saved ✨");
   } catch (err: any) {
@@ -78,6 +83,41 @@ const DreamForm = () => {
           Location
         </span>
       </label>
+
+      {/* Image URL */}
+      <label className="relative block">
+        <input
+          type="url"
+          className="peer w-full rounded-lg border border-gray-600 bg-gray-700 px-3 pt-5 pb-2 text-sm sm:text-base text-white placeholder-transparent focus:border-sky-400 focus:outline-none"
+          placeholder="Image URL"
+          value={imageUrl}
+          onChange={(e) => {
+            setImageUrl(e.target.value);
+            setImageError(false);
+          }}
+        />
+        <span className="absolute left-3 top-2 text-xs sm:text-sm text-gray-400 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs sm:peer-focus:text-sm peer-focus:text-sky-400">
+          Image URL
+        </span>
+      </label>
+
+      {/* Image Preview */}
+      {imageUrl && (
+        <div className="relative w-full h-32 rounded-lg overflow-hidden border border-gray-600 bg-gray-800">
+          {imageError ? (
+            <div className="flex items-center justify-center h-full text-red-400 text-xs text-center p-2">
+              Invalid image URL or failed to load
+            </div>
+          ) : (
+            <img 
+              src={imageUrl} 
+              alt="Preview" 
+              className="w-full h-full object-cover"
+              onError={() => setImageError(true)}
+            />
+          )}
+        </div>
+      )}
 
       {/* Type */}
       <label className="relative block">
